@@ -8,15 +8,15 @@ import com.untamedears.itemexchange.rules.interfaces.ModifierData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import net.minecraft.nbt.NBTTagCompound;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.BookMeta.Generation;
-import vg.civcraft.mc.civmodcore.serialization.NBTCompound;
-import vg.civcraft.mc.civmodcore.serialization.NBTSerializationException;
-import vg.civcraft.mc.civmodcore.util.MoreClassUtils;
+import vg.civcraft.mc.civmodcore.nbt.NBTSerializationException;
+import vg.civcraft.mc.civmodcore.utilities.MoreClassUtils;
 
 @CommandAlias(SetCommand.ALIAS)
 @Modifier(slug = "BOOK", order = 1000)
@@ -101,21 +101,21 @@ public final class BookModifier extends ModifierData {
 	}
 
 	@Override
-	public void serialize(NBTCompound nbt) throws NBTSerializationException {
+	public void serialize(NBTTagCompound nbt) throws NBTSerializationException {
 		nbt.setString(TITLE_KEY, this.title);
 		nbt.setString(AUTHOR_KEY, this.author);
 		nbt.setString(GENERATION_KEY, this.generation.name());
 		nbt.setBoolean(HAS_PAGES_KEY, this.hasPages);
-		nbt.setInteger(BOOK_HASH_KEY, this.bookHash);
+		nbt.setInt(BOOK_HASH_KEY, this.bookHash);
 	}
 
 	@Override
-	public void deserialize(NBTCompound nbt) throws NBTSerializationException {
+	public void deserialize(NBTTagCompound nbt) throws NBTSerializationException {
 		this.title = nbt.getString(TITLE_KEY);
 		this.author = nbt.getString(AUTHOR_KEY);
 		this.generation = EnumUtils.getEnum(Generation.class, nbt.getString(GENERATION_KEY));
 		this.hasPages = nbt.getBoolean(HAS_PAGES_KEY);
-		this.bookHash = nbt.getInteger(BOOK_HASH_KEY);
+		this.bookHash = nbt.getInt(BOOK_HASH_KEY);
 	}
 
 	@Override

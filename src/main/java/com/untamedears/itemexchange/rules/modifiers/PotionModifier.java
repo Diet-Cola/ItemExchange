@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -20,9 +21,8 @@ import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionType;
 import vg.civcraft.mc.civmodcore.inventory.items.PotionUtils;
-import vg.civcraft.mc.civmodcore.serialization.NBTCompound;
-import vg.civcraft.mc.civmodcore.util.MoreClassUtils;
-import vg.civcraft.mc.civmodcore.util.NullUtils;
+import vg.civcraft.mc.civmodcore.utilities.MoreClassUtils;
+import vg.civcraft.mc.civmodcore.utilities.NullUtils;
 
 @CommandAlias(SetCommand.ALIAS)
 @Modifier(slug = "POTION", order = 400)
@@ -78,7 +78,7 @@ public final class PotionModifier extends ModifierData {
 	}
 
 	@Override
-	public void serialize(NBTCompound nbt) {
+	public void serialize(NBTTagCompound nbt) {
 		nbt.setCompound(BASE_KEY, NBTEncodings.encodePotionData(this.base));
 		nbt.setCompoundArray(EFFECTS_KEY, getEffects().stream()
 				.map(NBTEncodings::encodePotionEffect)
@@ -86,7 +86,7 @@ public final class PotionModifier extends ModifierData {
 	}
 
 	@Override
-	public void deserialize(NBTCompound nbt) {
+	public void deserialize(NBTTagCompound nbt) {
 		setPotionData(NBTEncodings.decodePotionData(nbt.getCompound(BASE_KEY)));
 		setEffects(Arrays.stream(nbt.getCompoundArray(EFFECTS_KEY))
 				.map(NBTEncodings::decodePotionEffect)

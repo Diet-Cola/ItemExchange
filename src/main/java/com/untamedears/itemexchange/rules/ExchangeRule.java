@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import net.minecraft.nbt.NBTTagCompound;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.bukkit.ChatColor;
@@ -23,14 +24,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import vg.civcraft.mc.civmodcore.inventory.InventoryUtils;
 import vg.civcraft.mc.civmodcore.inventory.items.ItemUtils;
-import vg.civcraft.mc.civmodcore.serialization.NBTCompound;
-import vg.civcraft.mc.civmodcore.serialization.NBTSerializable;
-import vg.civcraft.mc.civmodcore.serialization.NBTSerialization;
-import vg.civcraft.mc.civmodcore.serialization.NBTSerializationException;
-import vg.civcraft.mc.civmodcore.util.MoreClassUtils;
-import vg.civcraft.mc.civmodcore.util.MoreCollectionUtils;
-import vg.civcraft.mc.civmodcore.util.NullUtils;
-import vg.civcraft.mc.civmodcore.util.Validation;
+import vg.civcraft.mc.civmodcore.nbt.NBTSerializable;
+import vg.civcraft.mc.civmodcore.nbt.NBTSerialization;
+import vg.civcraft.mc.civmodcore.nbt.NBTSerializationException;
+import vg.civcraft.mc.civmodcore.utilities.MoreClassUtils;
+import vg.civcraft.mc.civmodcore.utilities.MoreCollectionUtils;
+import vg.civcraft.mc.civmodcore.utilities.NullUtils;
+import vg.civcraft.mc.civmodcore.utilities.Validation;
 
 /**
  * This class represents an exchange rule.
@@ -218,22 +218,22 @@ public final class ExchangeRule implements ExchangeData {
 	}
 
 	@Override
-	public void serialize(NBTCompound nbt) throws NBTSerializationException {
-		nbt.setInteger(VERSION_KEY, 4);
+	public void serialize(NBTTagCompound nbt) throws NBTSerializationException {
+		nbt.setInt(VERSION_KEY, 4);
 		nbt.setString(TYPE_KEY, this.type.name());
 		nbt.setString(MATERIAL_KEY, this.material.name());
-		nbt.setInteger(AMOUNT_KEY, this.amount);
+		nbt.setInt(AMOUNT_KEY, this.amount);
 		nbt.setCompoundArray(MODIFIERS_KEY, this.modifiers.stream()
 				.map(NBTSerialization::serialize)
 				.filter(Validation::checkValidity)
-				.toArray(NBTCompound[]::new));
+				.toArray(NBTTagCompound[]::new));
 	}
 
 	@Override
-	public void deserialize(NBTCompound nbt) throws NBTSerializationException {
+	public void deserialize(NBTTagCompound nbt) throws NBTSerializationException {
 		this.type = EnumUtils.getEnum(Type.class, nbt.getString(TYPE_KEY));
 		this.material = EnumUtils.getEnum(Material.class, nbt.getString(MATERIAL_KEY));
-		this.amount = nbt.getInteger(AMOUNT_KEY);
+		this.amount = nbt.getInt(AMOUNT_KEY);
 		this.modifiers.clear();
 		Arrays.stream(nbt.getCompoundArray(MODIFIERS_KEY))
 				.map(raw -> MoreClassUtils.castOrNull(ModifierData.class, NBTSerialization.deserialize(raw)))
@@ -430,7 +430,7 @@ public final class ExchangeRule implements ExchangeData {
 	 * @return Returns an itemised representation of this rule.
 	 */
 	public ItemStack toItem() {
-		ItemStack item = NBTCompound.processItem(ItemExchangeConfig.getRuleItem(),
+		ItemStack item = NBTTagCompound.processItem(ItemExchangeConfig.getRuleItem(),
 				(nbt) -> nbt.setCompound(RULE_KEY, NBTSerialization.serialize(this)));
 		ItemUtils.handleItemMeta(item, (ItemMeta meta) -> {
 			meta.setDisplayName(getRuleTitle());
@@ -453,7 +453,7 @@ public final class ExchangeRule implements ExchangeData {
 		if (item.getType() != ItemExchangeConfig.getRuleItemMaterial()) {
 			return null;
 		}
-		NBTSerializable serializable = NBTSerialization.deserialize(NBTCompound.fromItem(item).getCompound(RULE_KEY));
+		NBTSerializable serializable = NBTSerialization.deserialize(NBTTagCompound.fromItem(item).getCompound(RULE_KEY));
 		if (serializable instanceof ExchangeRule) {
 			return (ExchangeRule) serializable;
 		}

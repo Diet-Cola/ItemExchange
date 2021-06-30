@@ -6,7 +6,7 @@ import com.untamedears.itemexchange.utility.ModifierStorage;
 import java.lang.reflect.Modifier;
 import java.util.Objects;
 import java.util.stream.Stream;
-import vg.civcraft.mc.civmodcore.serialization.NBTSerialization;
+import vg.civcraft.mc.civmodcore.nbt.NBTSerialization;
 
 public final class ModifierRegistrar {
 

@@ -7,11 +7,9 @@ import com.untamedears.itemexchange.rules.interfaces.ExchangeData;
 import com.untamedears.itemexchange.rules.interfaces.Modifier;
 import com.untamedears.itemexchange.rules.interfaces.ModifierData;
 import java.util.List;
+import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.inventory.ItemStack;
 import vg.civcraft.mc.civmodcore.inventory.items.ItemUtils;
-import vg.civcraft.mc.civmodcore.serialization.NBTCompound;
-import vg.civcraft.mc.civmodcore.serialization.NBTSerializationException;
-import vg.civcraft.mc.civmodcore.util.Validation;
 
 @CommandAlias(SetCommand.ALIAS) // This is needed to make commands work
 @Modifier(slug = "EXAMPLE", order = 12345)
@@ -66,7 +64,7 @@ public final class _ExampleModifier extends ModifierData {
 	 * @throws NBTSerializationException This is thrown if the implementation has a fatal error serializing.
 	 */
 	@Override
-	public void serialize(NBTCompound nbt) {
+	public void serialize(NBTTagCompound nbt) {
 
 	}
 
@@ -78,7 +76,7 @@ public final class _ExampleModifier extends ModifierData {
 	 * @throws NBTSerializationException This is thrown if the implementation has a fatal error deserializing.
 	 */
 	@Override
-	public void deserialize(NBTCompound nbt) {
+	public void deserialize(NBTTagCompound nbt) {
 
 	}
 

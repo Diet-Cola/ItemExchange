@@ -2,6 +2,7 @@ package com.untamedears.itemexchange.rules;
 
 import static com.untamedears.itemexchange.rules.ExchangeRule.Type;
 
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.untamedears.itemexchange.ItemExchangeConfig;
@@ -19,7 +20,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BlockIterator;
 import vg.civcraft.mc.civmodcore.inventory.InventoryUtils;
-import vg.civcraft.mc.civmodcore.util.Validation;
+import vg.civcraft.mc.civmodcore.utilities.Validation;
 import vg.civcraft.mc.civmodcore.world.WorldUtils;
 
 /**

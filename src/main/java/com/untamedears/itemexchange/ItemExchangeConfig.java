@@ -11,11 +11,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vg.civcraft.mc.civmodcore.CoreConfigManager;
+import vg.civcraft.mc.civmodcore.config.ConfigParser;
 import vg.civcraft.mc.civmodcore.inventory.RecipeManager;
 import vg.civcraft.mc.civmodcore.inventory.items.MaterialUtils;
 
-public final class ItemExchangeConfig extends CoreConfigManager {
+public final class ItemExchangeConfig extends ConfigParser {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ItemExchangeConfig.class.getSimpleName());
 

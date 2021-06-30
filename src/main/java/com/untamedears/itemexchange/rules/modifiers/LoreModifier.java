@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import net.minecraft.nbt.NBTTagCompound;
 import org.apache.commons.collections4.CollectionUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import vg.civcraft.mc.civmodcore.inventory.items.ItemUtils;
-import vg.civcraft.mc.civmodcore.serialization.NBTCompound;
-import vg.civcraft.mc.civmodcore.util.MoreCollectionUtils;
-import vg.civcraft.mc.civmodcore.util.TextUtil;
+import vg.civcraft.mc.civmodcore.utilities.MoreCollectionUtils;
+import vg.civcraft.mc.civmodcore.utilities.TextUtil;
 
 @CommandAlias(SetCommand.ALIAS)
 @Modifier(slug = "LORE", order = 300)
@@ -63,7 +63,7 @@ public final class LoreModifier extends ModifierData {
 	}
 
 	@Override
-	public void serialize(NBTCompound nbt) {
+	public void serialize(NBTTagCompound nbt) {
 		nbt.setStringArray(LORE_KEY, this.lore == null ? null : this.lore.toArray(new String[0]));
 	}
 

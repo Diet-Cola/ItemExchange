@@ -1,15 +1,15 @@
 package com.untamedears.itemexchange.commands;
 
 import com.untamedears.itemexchange.ItemExchangePlugin;
-import vg.civcraft.mc.civmodcore.command.AikarCommandManager;
+import vg.civcraft.mc.civmodcore.commands.CommandManager;
 
 /**
  * Registers all of ItemExchange's commands
  */
-public class CommandRegistrar extends AikarCommandManager {
+public class CommandRegistrar extends CommandManager {
 
 	public CommandRegistrar(ItemExchangePlugin plugin) {
-		super(plugin, false);
+		super(plugin);
 	}
 
 	@Override

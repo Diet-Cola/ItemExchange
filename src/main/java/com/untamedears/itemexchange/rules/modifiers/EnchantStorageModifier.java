@@ -11,15 +11,15 @@ import com.untamedears.itemexchange.utility.NBTEncodings;
 import com.untamedears.itemexchange.utility.Utilities;
 import java.util.List;
 import java.util.Map;
+import net.minecraft.nbt.NBTTagCompound;
 import org.apache.commons.collections4.MapUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import vg.civcraft.mc.civmodcore.inventory.items.EnchantUtils;
-import vg.civcraft.mc.civmodcore.serialization.NBTCompound;
-import vg.civcraft.mc.civmodcore.util.MoreClassUtils;
-import vg.civcraft.mc.civmodcore.util.MoreMapUtils;
+import vg.civcraft.mc.civmodcore.utilities.MoreClassUtils;
+import vg.civcraft.mc.civmodcore.utilities.MoreMapUtils;
 
 @CommandAlias(SetCommand.ALIAS)
 @Modifier(slug = "BOOKCHANTS", order = 201)
@@ -74,12 +74,12 @@ public final class EnchantStorageModifier extends ModifierData {
 	}
 
 	@Override
-	public void serialize(NBTCompound nbt) {
+	public void serialize(NBTTagCompound nbt) {
 		nbt.setCompound(ENCHANTS_KEY, NBTEncodings.encodeLeveledEnchants(getEnchants()));
 	}
 
 	@Override
-	public void deserialize(NBTCompound nbt) {
+	public void deserialize(NBTTagCompound nbt) {
 		setEnchants(NBTEncodings.decodeLeveledEnchants(nbt.getCompound(ENCHANTS_KEY)));
 	}
 

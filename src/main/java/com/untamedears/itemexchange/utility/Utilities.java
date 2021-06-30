@@ -27,10 +27,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import vg.civcraft.mc.civmodcore.inventory.InventoryUtils;
-import vg.civcraft.mc.civmodcore.util.Chainer;
-import vg.civcraft.mc.civmodcore.util.KeyedUtils;
-import vg.civcraft.mc.civmodcore.util.MoreClassUtils;
-import vg.civcraft.mc.civmodcore.util.NullUtils;
+import vg.civcraft.mc.civmodcore.utilities.KeyedUtils;
+import vg.civcraft.mc.civmodcore.utilities.MoreClassUtils;
+import vg.civcraft.mc.civmodcore.utilities.NullUtils;
 import vg.civcraft.mc.civmodcore.world.WorldUtils;
 
 /**

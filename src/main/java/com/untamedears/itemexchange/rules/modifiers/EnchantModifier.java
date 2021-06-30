@@ -27,14 +27,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import vg.civcraft.mc.civmodcore.inventory.items.EnchantUtils;
-import vg.civcraft.mc.civmodcore.serialization.NBTCompound;
-import vg.civcraft.mc.civmodcore.util.KeyedUtils;
-import vg.civcraft.mc.civmodcore.util.MoreMapUtils;
+import vg.civcraft.mc.civmodcore.utilities.KeyedUtils;
+import vg.civcraft.mc.civmodcore.utilities.MoreMapUtils;
 
 @CommandAlias(SetCommand.ALIAS)
 @Modifier(slug = "ENCHANTS", order = 200)
@@ -90,7 +90,7 @@ public final class EnchantModifier extends ModifierData {
 	}
 
 	@Override
-	public void serialize(NBTCompound nbt) {
+	public void serialize(NBTTagCompound nbt) {
 		nbt.setCompound(REQUIRED_KEY, NBTEncodings.encodeLeveledEnchants(getRequiredEnchants()));
 		nbt.setStringArray(EXCLUDED_KEY, getExcludedEnchants().stream()
 				.map(KeyedUtils::getString)
@@ -100,7 +100,7 @@ public final class EnchantModifier extends ModifierData {
 	}
 
 	@Override
-	public void deserialize(NBTCompound nbt) {
+	public void deserialize(NBTTagCompound nbt) {
 		setRequiredEnchants(NBTEncodings.decodeLeveledEnchants(nbt.getCompound(REQUIRED_KEY)));
 		setExcludedEnchants(Arrays.stream(nbt.getStringArray(EXCLUDED_KEY))
 				.map(EnchantUtils::getEnchantment)
